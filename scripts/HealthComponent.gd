@@ -5,7 +5,7 @@ class_name HealthComponent extends Node
 
 
 func damage(attack: Attack) -> void:
-	health -= attack.damage
+	health -= attack.attack_damage
 	if health <= 0:
 		health = 0
 		get_parent().queue_free()
