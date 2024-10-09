@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cx5fyd4rdn4e5"]
+
+[ext_resource type="Shader" path="res://utilities/shaders/apply_palette.gdshader" id="1_1uxqm"]
+[ext_resource type="Texture2D" uid="uid://0jitorbk4ooo" path="res://Hollow 1x.png" id="2_4w3kl"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_1uxqm")
+shader_parameter/flip = false
+shader_parameter/palette = ExtResource("2_4w3kl")
