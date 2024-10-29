@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://cds6sho8jp2de"]
+
+[ext_resource type="Script" path="res://utilities/components/first_order/PaletteComponent.gd" id="1_dp1v6"]
+[ext_resource type="Material" uid="uid://cx5fyd4rdn4e5" path="res://utilities/shaders/apply_palette.tres" id="1_iw5j1"]
+[ext_resource type="Texture2D" uid="uid://dl1oena1mejxi" path="res://SPRITES/darkness.png" id="2_p7vn5"]
+
+[node name="Palette" type="CanvasLayer"]
+layer = 128
+visible = false
+script = ExtResource("1_dp1v6")
+flip = null
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("1_iw5j1")
+scale = Vector2(99999, 99999)
+texture = ExtResource("2_p7vn5")
