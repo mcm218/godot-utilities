@@ -8,8 +8,11 @@ class_name FlockHerder2D extends Node2D
 @export var child_bounds_radius: float = 5.0
 
 var flock: Array[FlockHerder2DChild] = []
+var is_paused: bool = false
 
 func _ready():
+	GameState.on_state_changed.connect(_on_game_state_changed)
+
 	var points: Array[Vector2] = [];
 	for path in self.end_paths:
 		points.append(path.curve.get_point_position(0))
@@ -20,6 +23,12 @@ func _ready():
 			var child_speed: float = randf_range(self.speed * (1 - self.speed_variablity), self.speed * (1 + self.speed_variablity))
 			var closest_index = _find_closest_point(points, child.position)
 			flock.append(FlockHerder2DChild.new(child, child_speed, self.child_bounds_radius, self.end_paths[closest_index]))
+
+func _on_game_state_changed(state: Enums.State):
+	if state == Enums.State.PAUSED:
+		is_paused = true
+	else:
+		is_paused = false
 
 func _find_closest_point(points: Array[Vector2], point: Vector2) -> int:
 	var closest = 0
@@ -33,6 +42,7 @@ func _find_closest_point(points: Array[Vector2], point: Vector2) -> int:
 
 func _physics_process(_delta: float) -> void:
 	if not is_running: return
+	if is_paused: return
 
 	var children_to_remove: Array[FlockHerder2DChild] = []
 
