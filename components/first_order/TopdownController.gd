@@ -31,4 +31,4 @@ func _get_input_vector() -> Vector2:
 		direction_vector.x -= 1
 	if Input.is_action_pressed("move_right"):
 		direction_vector.x += 1
-	return direction_vector
+	return direction_vector.normalized()

@@ -51,7 +51,7 @@ func _physics_process(_delta: float) -> void:
 
 	var moved_characters: Array[FlockHerder2DChild] = []
 
-	# Flock serted by distance to their next point
+	# Flock sorted by distance to their next point
 	var sorted_flock: Array[FlockHerder2DChild] = self.flock.duplicate()
 	sorted_flock.sort_custom(
 		func (a, b) -> bool:
@@ -75,8 +75,8 @@ func _physics_process(_delta: float) -> void:
 		var body = character.body
 		var target_position: Vector2 = path.curve.get_point_position(index)
 		var original_speed = character.speed
-		while intercepts_other_child(moved_characters, character) && original_speed > 0:
-			character.speed -= -.25
+		# while intercepts_other_child(moved_characters, character) && original_speed > 0:
+		# 	character.speed -= -.25
 
 		character.move_to_point(target_position, character.speed)
 		moved_characters.append(character)
