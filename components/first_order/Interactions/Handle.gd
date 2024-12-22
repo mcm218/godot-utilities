@@ -13,9 +13,17 @@ func _process(_delta):
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT:
-		if event.pressed:
+		if event.pressed && is_mouse_over():
 			is_pressed = true
 			on_click.emit()
-		else:
+		elif is_pressed:
 			is_pressed = false
 			on_release.emit()
+
+func is_mouse_over() -> bool:
+	var mouse_global_position = get_global_mouse_position()
+	return within_range(global_position, mouse_global_position, 50.0)
+
+
+func within_range(a: Vector2, b: Vector2, distance: float) -> bool:
+	return a.distance_to(b) <= distance;
