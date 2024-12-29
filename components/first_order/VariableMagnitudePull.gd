@@ -4,7 +4,7 @@ signal on_release(strength: float, direction: Vector2)
 signal on_strength_change(strength: float)
 signal on_direction_change(direction: Vector2)
 
-@export var handle: Handle
+@export var handle: MouseHandle
 
 @export var strength: float = 0
 @export var direction: Vector2

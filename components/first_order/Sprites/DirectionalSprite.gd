@@ -4,6 +4,7 @@ class_name DirectionalSprite extends Node2D
 @export var use_diagonals: bool = false
 @export var VERTICAL_TOLERANCE: float = 0
 @export var HORIZONTAL_TOLERANCE: float = 0.25
+@export var debug: bool = false
 
 var num_avg: int = 5
 var avg_diffs: Array[Vector2] = []
@@ -28,7 +29,7 @@ func get_avg_diff() -> Vector2:
 	
 	return sum / avg_diffs.size()
 
-func _update():
+func _process(_delta):
 	var new_position = global_position;
 
 	var diff = (new_position - old_position).normalized()
@@ -40,10 +41,10 @@ func _update():
 	var is_left = avg_diff.x < -HORIZONTAL_TOLERANCE
 	var is_right = avg_diff.x > HORIZONTAL_TOLERANCE
 
-	if is_up: print_debug("up")
-	if is_down: print_debug("down")
-	if is_left: print_debug("left")
-	if is_right: print_debug("right")
+	if is_up && debug: print_debug(name + ": up")
+	if is_down && debug: print_debug(name + ": down")
+	if is_left && debug: print_debug(name + ": left")
+	if is_right && debug: print_debug(name + ": right")
 
 	if use_diagonals:
 		if is_up && is_left: target.play("up left")
@@ -56,10 +57,13 @@ func _update():
 		elif is_down: target.play("down")
 		elif is_left: target.play('left')
 		elif is_right: target.play('right')
+
+		else: target.play("idle")
 	else:
 		if is_left: target.play('left')
 		elif is_right: target.play('right')
 		elif is_up: target.play("up")
 		elif is_down: target.play('down')
+		else: target.play("idle")
 
 	old_position = new_position

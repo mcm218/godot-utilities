@@ -1,4 +1,6 @@
-class_name Handle extends Node2D
+class_name MouseHandle extends Node2D
+
+@export var is_enabled: bool = true
 
 signal on_click()
 signal on_release()
@@ -27,3 +29,10 @@ func is_mouse_over() -> bool:
 
 func within_range(a: Vector2, b: Vector2, distance: float) -> bool:
 	return a.distance_to(b) <= distance;
+
+
+func enable():
+	is_enabled = true
+
+func disable():
+	is_enabled = false
